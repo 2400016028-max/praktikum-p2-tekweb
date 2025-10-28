@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To-Do App</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        .container {
+            width: 350px;
+            margin: 0 auto;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+        }
+
+        #tasklist li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .close {
+            color: red;
+            float: right;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>My To-Do List</h2> 
+        <input type="text" id="newTask" placeholder="Add a new task...">
+        <button onclick="addTask()">Add</button>
+
+        <ul id="tasklist">
+        </ul>
+    </div>
+
+    <script>
+        function addTask() {
+        const input = document.getElementById("newTask");
+        const taskText = input.value.trim();
+        
+        if (taskText === "") {
+        alert("Masukkan tugas terlebih dahulu!");
+        return;
+      }
+
+      const li = document.createElement("li");
+      li.innerHTML = `
+        <span>${taskText}</span>
+      `;
+
+      document.getElementById("tasklist").appendChild(li);
+      input.value = ""; // Kosongkan input setelah menambahkan
+
+    }
+    
+        function deleteTask(element) {
+            element.remove();
+        }
+         
+        function editTask(element) {
+            const newText = prompt("Edit your task:", element.firstChild.textContent);
+            if (newText !== null && newText.trim() !== "") {
+                element.firstChild.textContent = newText.trim();
+            }
+
+        }
+    </script>
+
+</body>
+
+</html>
